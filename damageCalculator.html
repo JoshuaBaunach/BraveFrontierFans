@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Brave Frontier Fans</title>
+		<meta charset="utf-8" />
+		<link href="style.css" type="text/css" rel="stylesheet" />
+		<style type="text/css">
+			.calcinfo,.calc {
+				color: white;
+				background-color: black;
+				border-style: solid;
+				border-color: White;
+				margin: 10px 0px;
+			}
+			
+			.calc {
+				float: left;
+				width: 100%;
+			}
+			
+			input {
+				margin: 5px;
+			}
+			
+			.inputSection,.submitSection {
+				float: left;
+				margin: 5px;
+				border-style: solid;
+				border-color: white;
+				border-width: 1px;
+			}
+			
+			.submitSection {
+				clear: both;
+			}
+			
+			.calcSection {
+				clear: both;
+				border-style: solid;
+				border-color: White;
+				margin: 10px 5px;
+			}
+		</style>
+	</head>
+	<body style="background-image:url(images/base.jpg)">
+		<div class="banner">
+			<a href="index.php"><img src="images/DamageCalculatorBanner.png" alt="Banner" class="banner"/></a>
+		</div>
+		<div class="calcinfo">
+			<h1>Damage Calculator</h1>
+			<p>Use this calculator to calculate the damage potential of your unit! Formula courtesy of <a href="http://touchandswipe.github.io/bravefrontier/damagecalculatorglobal">BFPros</a>.</p>
+		</div>
+		<div class="calc">
+			<form method="POST" action="calculateDamage.php" id="calc" onsubmit="return checkInput()">
+				<label><input type="text" name="baseatk" value=1000 onblur="return checkInput()" />Unit ATK</label><label><input type="text" name="percentmod" value=100 onblur="return checkInput()"/>Percentage Modifier</label><br>
+				<label><input type="text" name="flatatk" value=100 onblur="return checkInput()"/>Flat ATK</label><br>
+				<br><br>
+				<span class="inputSection">
+					<h3>Damage Modifiers</h3>
+					<p><label><input type="checkbox" name="ore"/>Ore Used?</label></p>
+					<p><label><input type="checkbox" name="spark"/>Sparked?</label></p>
+					<p><label><input type="checkbox" name="elementalweakness"/>Elemental Weakness?</label></p>
+					<p><label><input type="checkbox" name="critical"/>Critical?</label></p>
+				</span>
+				<section class="calcSection">
+					<h1>Base Modifiers</h1>
+					<span class="inputSection">
+						<h3>Potion</h3>
+						<p><label><input type="radio" name="potion" value=.5 />50%</label></p>
+						<p><label><input type="radio" name="potion" value=.3 />30%</label></p>
+						<p><label><input type="radio" name="potion" value=0 checked="checked"/>None</label></p>
+					</span>
+					<span class="inputSection">
+						<h3>ATK Leader Skill</h3>
+						<p><label><input type="radio" name="leader" value=2 />200%</label></p>
+						<p><label><input type="radio" name="leader" value=1 />100%</label></p>
+						<p><label><input type="radio" name="leader" value=.75 />75%</label></p>
+						<p><label><input type="radio" name="leader" value=.65 />65%</label></p>
+						<p><label><input type="radio" name="leader" value=.50 />50%</label></p>
+						<p><label><input type="radio" name="leader" value=.25 />25%</label></p>
+						<p><label><input type="radio" name="leader" value=0 checked="checked"/>None</label></p>
+					</span>
+					<span class="inputSection">
+						<h3>ATK Friend Leader Skill</h3>
+						<p><label><input type="radio" name="friendleader" value=2 />200%</label></p>
+						<p><label><input type="radio" name="friendleader" value=1 />100%</label></p>
+						<p><label><input type="radio" name="friendleader" value=.75 />75%</label></p>
+						<p><label><input type="radio" name="friendleader" value=.65 />65%</label></p>
+						<p><label><input type="radio" name="friendleader" value=.50 />50%</label></p>
+						<p><label><input type="radio" name="friendleader" value=.25 />25%</label></p>
+						<p><label><input type="radio" name="friendleader" value=0 checked="checked"/>None</label></p>
+					</span>
+					<span class="inputSection">
+						<h3>ATK Buff</h3>
+						<p><label><input type="radio" name="atkbuff" value=2 />200% (Farlon)</label></p>
+						<p><label><input type="radio" name="atkbuff" value=1.7 />170% (Feeva)</label></p>
+						<p><label><input type="radio" name="atkbuff" value=1.3 />130% (Zergel)</label></p>
+						<p><label><input type="radio" name="atkbuff" value=1.2 />120% (Ultor)</label></p>
+						<p><label><input type="radio" name="atkbuff" value=1.5 />115% (Michele)</label></p>
+						<p><label><input type="radio" name="atkbuff" value=1 />100% (Kuda)</label></p>
+						<p><label><input type="radio" name="atkbuff" value=.9 />90% (Ciara)</label></p>
+						<p><label><input type="radio" name="atkbuff" value=.8 />80%</label></p>
+						<p><label><input type="radio" name="atkbuff" value=.7 />70%</label></p>
+						<p><label><input type="radio" name="atkbuff" value=.6 />60%</label></p>
+						<p><label><input type="radio" name="atkbuff" value=.5 />50%</label></p>
+						<p><label><input type="radio" name="atkbuff" value=.4 />40%</label></p>
+						<p><label><input type="radio" name="atkbuff" value=.3 />30%</label></p>
+						<p><label><input type="radio" name="atkbuff" value=0 checked="checked"/>None</label></p>
+					</span>
+					<span class="inputSection">
+						<h3>Element ATK Buff</h3>
+						<p><label><input type="radio" name="elementatkbuff" value=.75 />75% (Blaze/Cerise/Dranoel)</label></p>
+						<p><label><input type="radio" name="elementatkbuff" value=.5 />50% (Grybe/Zephyr)</label></p>
+						<p><label><input type="radio" name="elementatkbuff" value=0 checked="checked"/>None</label></p>
+					</span>
+					<span class="inputSection">
+						<h3>Sphere ATK Buff</h3>
+						<p><label><input type="radio" name="sphereatkbuff" value=1 />100% (Wicked)</label></p>
+						<p><label><input type="radio" name="sphereatkbuff" value=.75 />75% (Amano)</label></p>
+						<p><label><input type="radio" name="sphereatkbuff" value=.50 />50% (Divine)</label></p>
+						<p><label><input type="radio" name="sphereatkbuff" value=.30 />30% (Malice)</label></p>
+						<p><label><input type="radio" name="sphereatkbuff" value=.25 />25% (Legwand)</label></p>
+						<p><label><input type="radio" name="sphereatkbuff" value=.20 />20% (Medulla)</label></p>
+						<p><label><input type="radio" name="sphereatkbuff" value=.15 />15% (Sacred)</label></p>
+						<p><label><input type="radio" name="sphereatkbuff" value=0 checked="checked"/>None</label></p>
+					</span>
+				</section>
+				<section class="calcSection">
+					<h1>Spark Modifiers</h1>
+					<span class="inputSection">
+						<h3>Spark Leader Skill</h3>
+						<p><label><input type="radio" name="sparkleader" value=.75 />75% (Hogar)</label></p>
+						<p><label><input type="radio" name="sparkleader" value=.5 />50% (Leorone)</label></p>
+						<p><label><input type="radio" name="sparkleader" value=.3 />30% (Others)</label></p>
+						<p><label><input type="radio" name="sparkleader" value=0 checked="checked"/>None</label></p>
+					</span>
+					<span class="inputSection">
+						<h3>Spark Friend Leader Skill</h3>
+						<p><label><input type="radio" name="sparkfriendleader" value=.75 />75% (Hogar)</label></p>
+						<p><label><input type="radio" name="sparkfriendleader" value=.5 />50% (Leorone)</label></p>
+						<p><label><input type="radio" name="sparkfriendleader" value=.3 />30% (Others)</label></p>
+						<p><label><input type="radio" name="sparkfriendleader" value=0 checked="checked"/>None</label></p>
+					</span>
+					<span class="inputSection">
+						<h3>Spark Buff</h3>
+						<p><label><input type="radio" name="sparkbuff" value=3 />300% (Loch)</label></p>
+						<p><label><input type="radio" name="sparkbuff" value=1.2 />120% (Eze)</label></p>
+						<p><label><input type="radio" name="sparkbuff" value=.8 />80% (Rosetta)</label></p>
+						<p><label><input type="radio" name="sparkbuff" value=.7 />70% (Elza)</label></p>
+						<p><label><input type="radio" name="sparkbuff" value=.5 />50% (Luther)</label></p>
+						<p><label><input type="radio" name="sparkbuff" value=.4 />40% (Others)</label></p>
+						<p><label><input type="radio" name="sparkbuff" value=0 checked="checked"/>None</label></p>
+					</span>
+					<span class="inputSection">
+						<h3>Spark Sphere</h3>
+						<p><label><input type="radio" name="sparksphere" value=1.5 />150% (Dual Sphere)</label></p>
+						<p><label><input type="radio" name="sparksphere" value=1 />100% (Heavenly Bud)</label></p>
+						<p><label><input type="radio" name="sparksphere" value=.5 />50% (Steeple Rose)</label></p>
+						<p><label><input type="radio" name="sparksphere" value=.25 />25% (Royal Bud)</label></p>
+						<p><label><input type="radio" name="sparksphere" value=0 checked="checked"/>None</label></p>
+					</span>
+				</section>
+				<section class="calcSection">
+					<h1>Elemental Weakness Modifiers</h1>
+					<span class="inputSection">
+						<h3>Elemental Weakness Leader Skill</h3>
+						<p><label><input type="radio" name="elementalweaknessleader" value=1.25 />125% (Mare)</label></p>
+						<p><label><input type="radio" name="elementalweaknessleader" value=1 />100% (Maxwell)</label></p>
+						<p><label><input type="radio" name="elementalweaknessleader" value=.75 />75% (Ciara)</label></p>
+						<p><label><input type="radio" name="elementalweaknessleader" value=.75 />25% (Others)</label></p>
+						<p><label><input type="radio" name="elementalweaknessleader" value=0 checked="checked"/>None</label></p>
+					</span>
+					<span class="inputSection">
+						<h3>Friend Elemental Weakness Leader Skill</h3>
+						<p><label><input type="radio" name="friendelementalweaknessleader" value=1.25 />125% (Mare)</label></p>
+						<p><label><input type="radio" name="friendelementalweaknessleader" value=1 />100% (Maxwell)</label></p>
+						<p><label><input type="radio" name="friendelementalweaknessleader" value=.75 />75% (Ciara)</label></p>
+						<p><label><input type="radio" name="friendelementalweaknessleader" value=.75 />25% (Others)</label></p>
+						<p><label><input type="radio" name="friendelementalweaknessleader" value=0 checked="checked"/>None</label></p>
+					</span>
+				</section>
+				<section class="calcSection">
+					<h1>Critical Modifiers</h1>
+					<span class="inputSection">
+						<h3>Critical Leader Skill</h3>
+						<p><label><input type="radio" name="criticalleader" value=1.5 />150% (Zebra)</label></p>
+						<p><label><input type="radio" name="criticalleader" value=1.25 />125% (Maxwell)</label></p>
+						<p><label><input type="radio" name="criticalleader" value=1 />100% (Mariudeth)</label></p>
+						<p><label><input type="radio" name="criticalleader" value=.5 />50% (Vishra)</label></p>
+						<p><label><input type="radio" name="criticalleader" value=0 checked="checked"/>None</label></p>
+					</span>
+					<span class="inputSection">
+						<h3>Critical Friend Leader Skill</h3>
+						<p><label><input type="radio" name="friendcriticalleader" value=1.5 />150% (Zebra)</label></p>
+						<p><label><input type="radio" name="friendcriticalleader" value=1.25 />125% (Maxwell)</label></p>
+						<p><label><input type="radio" name="friendcriticalleader" value=1 />100% (Mariudeth)</label></p>
+						<p><label><input type="radio" name="friendcriticalleader" value=.5 />50% (Vishra)</label></p>
+						<p><label><input type="radio" name="friendcriticalleader" value=0 checked="checked"/>None</label></p>
+					</span>
+					<span class="inputSection">
+						<h3>Critical Sphere</h3>
+						<p><label><input type="radio" name="criticalsphere" value=2 />200% (Geldnite)</label></p>
+						<p><label><input type="radio" name="criticalsphere" value=0 checked="checked"/>None</label></p>
+					</span>
+				</section>
+				<br><br>
+				<span class="submitSection">
+					<input type="submit" value="See Damage"/><input type="reset" value="Reset Form" />
+				</span>
+			</form>
+		</div>
+		<script type="text/javascript" src="checkDamageCalc.js"></script>
+	</body>
+</html>

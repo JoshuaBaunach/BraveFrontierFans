@@ -1,0 +1,27 @@
+/* To be used */
+
+* {
+	font-family: sans-serif;
+}
+
+a:visited {
+	color: red;
+}
+
+a:link {
+	color: #66CCCC;
+}
+
+.banner {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+}
+
+table {
+	background-color: white;
+}
+
+a {
+	font-family: "Times New Roman", Times, Serif;
+}

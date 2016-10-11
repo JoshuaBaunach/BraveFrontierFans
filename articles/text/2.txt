@@ -1,0 +1,3 @@
+Site Features
+April 24, 2015
+When this site is done, it will include several features. One of them is a tier list for each element. This will display each unit as they currently stand in the metagame. Another feature is that there will be a damage calculator. This will take in the stats of your unit, various buffs that could be applied, and tells you how much damage it could deal.
